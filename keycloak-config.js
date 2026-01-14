@@ -3,7 +3,7 @@
 
 const keycloakConfig = {
   development: {
-    clientId: 'self-service-portal-dev',
+    clientId: 'b1-id-portal-dev',
     realm: 'self-service-realm',
     baseUrl: 'http://localhost:8080',
     authUrl: '/realms/self-service-realm/protocol/openid-connect',
@@ -13,7 +13,7 @@ const keycloakConfig = {
     }
   },
   production: {
-    clientId: 'self-service-portal-prod',
+    clientId: 'b1-id-portal-prod',
     realm: 'production-realm',
     baseUrl: process.env.KEYCLOAK_BASE_URL || 'https://sso.yourcompany.com',
     authUrl: '/realms/production-realm/protocol/openid-connect',
