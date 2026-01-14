@@ -23,6 +23,30 @@
 
 ## Установка
 
+### Быстрая установка с помощью git clone
+
+Чтобы быстро установить и настроить MFA Self-Service Portal на вашей целевой машине, используйте следующую команду:
+
+```bash
+git clone https://github.com/your-repo/mfa-self-service-portal.git
+cd mfa-self-service-portal
+npm install
+npm run build
+npm start
+```
+
+### Установка с использованием скрипта
+
+Вы также можете использовать скрипт установки:
+
+```bash
+curl -o install.sh https://raw.githubusercontent.com/your-repo/mfa-self-service-portal/main/install.sh
+chmod +x install.sh
+./install.sh [repository-url] [target-directory]
+```
+
+### Ручная установка
+
 1. Установите зависимости:
    ```bash
    npm install
@@ -45,6 +69,39 @@
 2. Создайте клиент (client) для этого приложения
 3. Обновите конфигурацию в `keycloak-config.js`
 4. Убедитесь, что у вас есть права на вызов Admin API для выполнения операций управления
+
+## Запуск с помощью Docker
+
+Приложение можно запустить с использованием Docker и Docker Compose:
+
+```bash
+# Клонируйте репозиторий
+git clone https://github.com/your-repo/mfa-self-service-portal.git
+cd mfa-self-service-portal
+
+# Запустите сервисы (включая Keycloak)
+docker-compose up -d
+
+# Приложение будет доступно по адресу http://localhost:3000
+# Keycloak будет доступен по адресу http://localhost:8080
+```
+
+Для остановки сервисов используйте:
+```bash
+docker-compose down
+```
+
+## Конфигурация
+
+Создайте файл `.env` в корневом каталоге с следующими переменными:
+
+```env
+KEYCLOAK_BASE_URL=http://localhost:8080
+KEYCLOAK_ADMIN_USERNAME=admin
+KEYCLOAK_ADMIN_PASSWORD=admin
+KEYCLOAK_REALM=your-realm-name
+PORT=3000
+```
 
 ## Использование
 

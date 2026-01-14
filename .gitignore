@@ -1,41 +1,15 @@
 ```
-# Dependencies
-node_modules/
-
-# Environment variables
-.env
+# Environment
 .env.local
 .env.*
 
-# Build outputs
-dist/
-build/
-target/
+# Dependencies
+node_modules/
 
-# Logs
+# Logs and temp files
 *.log
-
-# Temporary files
 *.tmp
-*.swp
 
-# IDE files
+# Editors
 .vscode/
-.idea/
-
-# Python cache (if any Python files exist)
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-
-# Coverage reports
-coverage/
-htmlcov/
-.coverage
-
-# Package manager caches
-.npm/
-.yarn/
-.pnpm-store/
 ```
