@@ -1,0 +1,30 @@
+{
+  "name": "mfa-selfservice-portal",
+  "version": "1.0.0",
+  "description": "Self-service portal for password reset, account unlock, and MFA configuration",
+  "main": "server.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "start": "node server.js",
+    "dev:server": "nodemon server.js",
+    "dev:client": "vite",
+    "dev:both": "concurrently \"npm run dev:server\" \"npm run dev:client\""
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "keycloak-connect": "^22.0.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "axios": "^1.4.0",
+    "express-session": "^1.17.3",
+    "react-router-dom": "^6.8.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.0.0",
+    "vite": "^4.4.0",
+    "concurrently": "^7.6.0",
+    "nodemon": "^2.0.20"
+  }
+}
