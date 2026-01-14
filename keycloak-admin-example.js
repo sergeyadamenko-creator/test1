@@ -3,7 +3,7 @@
  * 
  * Этот файл демонстрирует, как можно использовать Keycloak Admin API
  * для выполнения операций, таких как смена пароля, разблокировка аккаунта
- * и настройка MFA в контексте нескольких realm.
+ * и настройка 2FA в контексте нескольких realm.
  */
 
 const axios = require('axios');
@@ -143,7 +143,7 @@ class KeycloakAdminClient {
   }
 
   /**
-   * Получение настроек аутентификации пользователя (включая MFA)
+   * Получение настроек аутентификации пользователя (включая 2FA)
    */
   async getUserAuthenticationSettings(userId) {
     const token = await this.getAdminToken();
@@ -179,9 +179,9 @@ class KeycloakAdminClient {
   }
 
   /**
-   * Настройка MFA для пользователя
+   * Настройка 2FA для пользователя
    */
-  async configureUserMFA(userId, mfaType = 'totp') {
+  async configureUser2FA(userId, mfaType = 'totp') {
     const token = await this.getAdminToken();
     
     try {
@@ -211,7 +211,7 @@ class KeycloakAdminClient {
           `${this.baseUrl}/admin/realms/${this.realm}/users/${userId}/configure-totp`,
           {
             type: 'totp',
-            userLabel: 'MFA Setup',
+            userLabel: '2FA Setup',
             algorithm: 'HmacSHA1',
             digits: 6,
             period: 30,
@@ -226,7 +226,7 @@ class KeycloakAdminClient {
         );
       }
     } catch (error) {
-      console.error('Error configuring MFA:', error.message);
+      console.error('Error configuring 2FA:', error.message);
       throw error;
     }
   }

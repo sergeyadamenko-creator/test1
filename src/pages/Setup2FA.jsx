@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const MFASetup = () => {
+const Setup2FA = () => {
   const [step, setStep] = useState(1); // 1: выбор метода, 2: настройка, 3: подтверждение
   const [method, setMethod] = useState('totp'); // totp или sms
   const [secretKey, setSecretKey] = useState('');
@@ -33,7 +33,7 @@ const MFASetup = () => {
 
     try {
       // Здесь будет API вызов для проверки кода
-      // await verifyMFACode(verificationCode, method);
+      // await verify2FACode(verificationCode, method);
       
       // Симуляция успешной проверки
       setTimeout(() => {
@@ -53,7 +53,7 @@ const MFASetup = () => {
   };
 
   const handleFinishSetup = () => {
-    setMessage('MFA setup completed successfully!');
+    setMessage('2FA setup completed successfully!');
   };
 
   const handleDownloadBackupCodes = () => {
@@ -70,7 +70,7 @@ const MFASetup = () => {
   };
 
   return (
-    <div className="mfa-setup page">
+    <div className="setup-2fa page">
       <div className="container">
         <h2>Setup Two-Factor Authentication</h2>
         
@@ -187,7 +187,7 @@ const MFASetup = () => {
         
         {step === 3 && (
           <div className="setup-step">
-            <h3>MFA Setup Complete</h3>
+            <h3>2FA Setup Complete</h3>
             
             <div className="success-message">
               <div className="checkmark">✓</div>
@@ -225,4 +225,4 @@ const MFASetup = () => {
   );
 };
 
-export default MFASetup;
+export default Setup2FA;

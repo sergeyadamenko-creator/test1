@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Header from './components/Header';
 import PasswordChange from './pages/PasswordChange';
 import AccountUnlock from './pages/AccountUnlock';
-import MFASetup from './pages/MFASetup';
+import Setup2FA from './pages/Setup2FA';
 import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import './assets/style.css';
@@ -82,7 +82,7 @@ const App = () => {
               path="/setup-mfa" 
               element={
                 isAuthenticated ? 
-                  <MFASetup /> : 
+                  <Setup2FA /> : 
                   <Navigate to="/login" />
               } 
             />

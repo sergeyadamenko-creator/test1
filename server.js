@@ -90,9 +90,9 @@ app.post('/api/unlock-account', keycloak.protect(), express.json(), async (req, 
   }
 });
 
-// API для настройки MFA
+// API для настройки 2FA
 app.post('/api/setup-mfa', keycloak.protect(), express.json(), (req, res) => {
-  // Реализация настройки MFA через Keycloak
+  // Реализация настройки 2FA через Keycloak
   const { method, phoneNumber } = req.body;
   
   // В реальном приложении здесь будет интеграция с Keycloak
@@ -100,7 +100,7 @@ app.post('/api/setup-mfa', keycloak.protect(), express.json(), (req, res) => {
   
   res.json({ 
     success: true, 
-    message: 'MFA setup initiated',
+    message: '2FA setup initiated',
     secretKey: 'ABCDEF1234567890', // временный ключ для демонстрации
     qrCodeUrl: `https://chart.googleapis.com/chart?chs=200x200&chld=M|0&cht=qr&chl=${encodeURIComponent(`otpauth://totp/Self-Service%20Portal:${req.kauth.grant.access_token.content.preferred_username}?secret=ABCDEF1234567890&issuer=Self-Service%20Portal`)}`
   });
