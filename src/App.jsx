@@ -14,16 +14,18 @@ const App = () => {
 
   // Проверяем аутентификацию при загрузке приложения
   useEffect(() => {
-    // Здесь будет логика проверки сессии
+    // Проверяем наличие токена в localStorage
     const token = localStorage.getItem('authToken');
     if (token) {
+      // В реальном приложении нужно декодировать токен и проверить его валидность
       setIsAuthenticated(true);
-      // Получаем информацию о пользователе
+      // Можно декодировать базовую информацию из токена
       try {
-        const userData = JSON.parse(atob(token.split('.')[1]));
-        setUser(userData);
+        const payload = token.split('.')[1];
+        const decodedPayload = JSON.parse(atob(payload));
+        setUser(decodedPayload);
       } catch (error) {
-        console.error('Error parsing token:', error);
+        console.error('Error decoding token:', error);
       }
     }
   }, []);
@@ -31,7 +33,6 @@ const App = () => {
   const handleLogin = (userData) => {
     setIsAuthenticated(true);
     setUser(userData);
-    localStorage.setItem('authToken', userData.token);
   };
 
   const handleLogout = () => {

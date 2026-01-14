@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 const AccountUnlock = () => {
   const [username, setUsername] = useState('');
@@ -11,18 +12,31 @@ const AccountUnlock = () => {
     setMessage('');
 
     try {
-      // Здесь будет API вызов для разблокировки аккаунта
-      // await unlockAccountAPI(username);
+      const token = localStorage.getItem('authToken');
       
-      // Имитация успешной разблокировки
-      setTimeout(() => {
+      const response = await axios.post('http://localhost:3001/api/unlock-account', {
+        username
+      }, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      
+      if (response.data.success) {
         setIsLoading(false);
         setMessage(`Account "${username}" has been unlocked successfully!`);
         setUsername('');
-      }, 1500);
+      } else {
+        setMessage(response.data.message || 'Failed to unlock account');
+        setIsLoading(false);
+      }
     } catch (error) {
       setIsLoading(false);
-      setMessage('Failed to unlock account: ' + error.message);
+      if (error.response) {
+        setMessage(error.response.data.message || 'Failed to unlock account');
+      } else {
+        setMessage('Network error occurred');
+      }
     }
   };
 

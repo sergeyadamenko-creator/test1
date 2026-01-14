@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const Setup2FA = () => {
   const [step, setStep] = useState(1); // 1: выбор метода, 2: настройка, 3: подтверждение
@@ -10,15 +11,34 @@ const Setup2FA = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState('');
 
-  // Генерация QR кода и секретного ключа (симуляция)
-  const generateQRCode = () => {
-    // В реальном приложении здесь будет вызов API для генерации QR-кода
-    const secret = 'ABCDEF1234567890';
-    setSecretKey(secret);
+  // Генерация QR кода и секретного ключа через API
+  const generateQRCode = async () => {
+    setIsLoading(true);
+    setMessage('');
     
-    // Просто URL для демонстрации
-    const qrUrl = `https://chart.googleapis.com/chart?chs=200x200&chld=M|0&cht=qr&chl=${encodeURIComponent(`otpauth://totp/Self-Service%20Portal:user@example.com?secret=${secret}&issuer=Self-Service%20Portal`)}`;
-    setQrCode(qrUrl);
+    try {
+      const token = localStorage.getItem('authToken');
+      
+      const response = await axios.post('http://localhost:3001/api/setup-mfa', {
+        method: method,
+        phoneNumber: '' // будет добавлено позже если метод SMS
+      }, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      
+      if (response.data.success) {
+        setSecretKey(response.data.secretKey);
+        setQrCode(response.data.qrCodeUrl);
+      } else {
+        setMessage(response.data.message || 'Failed to generate QR code');
+      }
+    } catch (error) {
+      setMessage(error.response?.data?.message || 'Failed to generate QR code');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleMethodSelect = (selectedMethod) => {
@@ -110,6 +130,8 @@ const Setup2FA = () => {
                 <div className="qr-container">
                   {qrCode ? (
                     <img src={qrCode} alt="QR Code for authenticator app" />
+                  ) : isLoading ? (
+                    <div className="qr-placeholder">Generating QR Code...</div>
                   ) : (
                     <div className="qr-placeholder">QR Code Loading...</div>
                   )}
