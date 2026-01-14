@@ -22,7 +22,7 @@ const Dashboard = ({ user }) => {
             </Link>
             
             <Link to="/setup-mfa" className="action-card">
-              <h4>Setup MFA</h4>
+              <h4>Setup 2FA</h4>
               <p>Configure two-factor authentication</p>
             </Link>
           </div>
@@ -44,7 +44,7 @@ const Dashboard = ({ user }) => {
               <span className="status active">Active</span>
             </div>
             <div className="info-item">
-              <label>MFA Status:</label>
+              <label>2FA Status:</label>
               <span className="status enabled">Enabled</span>
             </div>
           </div>

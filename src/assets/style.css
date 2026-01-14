@@ -332,7 +332,7 @@ body {
   border: 1px solid var(--border-color);
 }
 
-/* Стили для страницы настройки MFA */
+/* Стили для страницы настройки 2FA */
 .setup-step {
   max-width: 600px;
   margin: 0 auto;

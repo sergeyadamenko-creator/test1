@@ -15,7 +15,7 @@ const Header = ({ isAuthenticated, onLogout }) => {
               <li><Link to="/">Dashboard</Link></li>
               <li><Link to="/change-password">Change Password</Link></li>
               <li><Link to="/unlock-account">Unlock Account</Link></li>
-              <li><Link to="/setup-mfa">Setup MFA</Link></li>
+              <li><Link to="/setup-mfa">Setup 2FA</Link></li>
               <li><button onClick={onLogout} className="logout-btn">Logout</button></li>
             </ul>
           </nav>
