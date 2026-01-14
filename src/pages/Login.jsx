@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Login = ({ onLogin }) => {
   const [username, setUsername] = useState('');
@@ -15,27 +16,26 @@ const Login = ({ onLogin }) => {
     setMessage('');
 
     try {
-      // Здесь будет реальный API вызов для аутентификации
-      // const response = await authenticateUser(username, password);
-      
-      // Симуляция успешной аутентификации
-      setTimeout(() => {
-        setIsLoading(false);
-        
-        // Создаем mock данные пользователя
-        const mockUser = {
-          preferred_username: username,
-          email: `${username}@example.com`,
-          name: username,
-          token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
-        };
-        
-        onLogin(mockUser);
-        navigate('/');
-      }, 1000);
+      const response = await axios.post('http://localhost:3001/api/login', {
+        username,
+        password
+      });
+
+      // Сохраняем токен в localStorage
+      localStorage.setItem('authToken', response.data.token);
+
+      // Вызываем колбэк для обновления состояния аутентификации
+      onLogin(response.data.user);
+
+      // Переходим на главную страницу
+      navigate('/');
     } catch (error) {
       setIsLoading(false);
-      setMessage('Login failed: ' + error.message);
+      if (error.response) {
+        setMessage(`Login failed: ${error.response.data.message || 'Invalid credentials'}`);
+      } else {
+        setMessage('Login failed: Network error');
+      }
     }
   };
 

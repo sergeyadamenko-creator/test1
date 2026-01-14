@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 const PasswordChange = () => {
   const [currentPassword, setCurrentPassword] = useState('');
@@ -19,20 +20,34 @@ const PasswordChange = () => {
     setMessage('');
 
     try {
-      // Здесь будет API вызов для смены пароля
-      // await changePasswordAPI(currentPassword, newPassword);
+      const token = localStorage.getItem('authToken');
       
-      // Имитация успешной смены пароля
-      setTimeout(() => {
+      const response = await axios.post('http://localhost:3001/api/change-password', {
+        currentPassword,
+        newPassword
+      }, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      
+      if (response.data.success) {
         setIsLoading(false);
         setMessage('Password changed successfully!');
         setCurrentPassword('');
         setNewPassword('');
         setConfirmPassword('');
-      }, 1000);
+      } else {
+        setMessage(response.data.message || 'Failed to change password');
+        setIsLoading(false);
+      }
     } catch (error) {
       setIsLoading(false);
-      setMessage('Failed to change password: ' + error.message);
+      if (error.response) {
+        setMessage(error.response.data.message || 'Failed to change password');
+      } else {
+        setMessage('Network error occurred');
+      }
     }
   };
 
