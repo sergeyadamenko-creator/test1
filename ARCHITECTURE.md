@@ -1,4 +1,4 @@
-# Архитектура MFA Self-Service Portal
+# Архитектура B1 ID Portal
 
 ## Обзор
 
@@ -175,7 +175,7 @@ CMD ["node", "server.js"]
 ```
 NODE_ENV=production
 KEYCLOAK_BASE_URL=https://sso.company.com
-KEYCLOAK_CLIENT_ID=self-service-portal
+KEYCLOAK_CLIENT_ID=b1-id-portal
 KEYCLOAK_CLIENT_SECRET=******
 PORT=3001
 ```

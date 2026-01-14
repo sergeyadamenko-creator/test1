@@ -13,7 +13,7 @@ services:
     
   mfa-portal:
     build: .
-    container_name: mfa-self-service-portal
+    container_name: b1-id-portal
     depends_on:
       - keycloak
     ports:

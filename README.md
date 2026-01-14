@@ -1,6 +1,6 @@
-# MFA Self-Service Portal
+# B1 ID Portal
 
-Клон сайта https://mfa.b1.ru/ - это портал самообслуживания, где пользователи могут изменить пароль, разблокировать свою учетную запись и настроить двухфакторную аутентификацию (MFA).
+B1 ID Portal - это портал самообслуживания, где пользователи могут изменить пароль, разблокировать свою учетную запись и настроить двухфакторную аутентификацию (MFA).
 
 ## Особенности
 
@@ -25,11 +25,11 @@
 
 ### Быстрая установка с помощью git clone
 
-Чтобы быстро установить и настроить MFA Self-Service Portal на вашей целевой машине, используйте следующую команду:
+Чтобы быстро установить и настроить B1 ID Portal на вашей целевой машине, используйте следующую команду:
 
 ```bash
-git clone https://github.com/your-repo/mfa-self-service-portal.git
-cd mfa-self-service-portal
+git clone https://github.com/your-repo/b1-id-portal.git
+cd b1-id-portal
 npm install
 npm run build
 npm start
@@ -40,7 +40,7 @@ npm start
 Вы также можете использовать скрипт установки:
 
 ```bash
-curl -o install.sh https://raw.githubusercontent.com/your-repo/mfa-self-service-portal/main/install.sh
+curl -o install.sh https://raw.githubusercontent.com/your-repo/b1-id-portal/main/install.sh
 chmod +x install.sh
 ./install.sh [repository-url] [target-directory]
 ```
@@ -76,8 +76,8 @@ chmod +x install.sh
 
 ```bash
 # Клонируйте репозиторий
-git clone https://github.com/your-repo/mfa-self-service-portal.git
-cd mfa-self-service-portal
+git clone https://github.com/your-repo/b1-id-portal.git
+cd b1-id-portal
 
 # Запустите сервисы (включая Keycloak)
 docker-compose up -d
@@ -128,7 +128,7 @@ PORT=3000
 ```javascript
 const keycloakConfig = {
   development: {
-    clientId: 'self-service-portal-dev',
+    clientId: 'b1-id-portal-dev',
     realm: 'self-service-realm',
     baseUrl: 'http://localhost:8080',
     authUrl: '/realms/self-service-realm/protocol/openid-connect',
@@ -138,7 +138,7 @@ const keycloakConfig = {
     }
   },
   production: {
-    clientId: 'self-service-portal-prod',
+    clientId: 'b1-id-portal-prod',
     realm: 'production-realm',
     baseUrl: process.env.KEYCLOAK_BASE_URL || 'https://sso.yourcompany.com',
     authUrl: '/realms/production-realm/protocol/openid-connect',

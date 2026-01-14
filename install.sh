@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# Script for installing and setting up the MFA Self-Service Portal
+# Script for installing and setting up the B1 ID Portal
 
 set -e  # Exit immediately if a command exits with a non-zero status
 
-echo "MFA Self-Service Portal Installation Script"
+echo "B1 ID Portal Installation Script"
 
 # Check if Git is installed
 if ! command -v git &> /dev/null; then
@@ -25,8 +25,8 @@ if ! command -v npm &> /dev/null; then
 fi
 
 # Clone the repository
-REPO_URL="${1:-https://github.com/your-repo/mfa-self-service-portal.git}"
-TARGET_DIR="${2:-mfa-portal}"
+REPO_URL="${1:-https://github.com/your-repo/b1-id-portal.git}"
+TARGET_DIR="${2:-b1-portal}"
 
 echo "Cloning repository from $REPO_URL to $TARGET_DIR..."
 git clone "$REPO_URL" "$TARGET_DIR"

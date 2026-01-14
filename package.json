@@ -1,7 +1,7 @@
 {
-  "name": "mfa-selfservice-portal",
+  "name": "b1-id-portal",
   "version": "1.0.0",
-  "description": "Self-service portal for password reset, account unlock, and MFA configuration",
+  "description": "B1 ID Portal - Self-service portal for password reset, account unlock, and MFA configuration",
   "main": "server.js",
   "scripts": {
     "dev": "vite",
