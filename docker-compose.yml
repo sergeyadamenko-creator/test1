@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    container_name: keycloak-mfa-portal
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+    ports:
+      - "8080:8080"
+    command: ["start-dev"]
+    
+  mfa-portal:
+    build: .
+    container_name: mfa-self-service-portal
+    depends_on:
+      - keycloak
+    ports:
+      - "3000:3000"
+    environment:
+      - KEYCLOAK_BASE_URL=http://keycloak:8080
+      - KEYCLOAK_ADMIN_USERNAME=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+      - KEYCLOAK_REALM=master
+      - PORT=3000
+    restart: unless-stopped
